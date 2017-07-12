@@ -15,6 +15,15 @@ add_subdirectory(glm)
 # now build app's shared lib
 add_library(gltest SHARED
             android_main.cpp
+            app_engine.cpp
+            scene.cpp
+            SceneManager.cpp
+            input_util.cpp
+            util.cpp
+            indexbuf.cpp
+            vertexbuf.cpp
+            ascii_to_geom.cpp
+            shader.cpp
             )
 
 target_include_directories(gltest PRIVATE
