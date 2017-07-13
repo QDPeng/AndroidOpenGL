@@ -11,6 +11,9 @@
 #include "util.hpp"
 #include "ascii_to_geom.h"
 #include "scene.h"
+#include "shader.h"
+#include "text_render.h"
+#include "shape_render.h"
 
 #define UI_DIR_UP 0
 #define UI_DIR_RIGHT 1

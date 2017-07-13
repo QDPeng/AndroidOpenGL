@@ -25,6 +25,14 @@
                 android:name="android.app.lib_name"
                 android:value="game" />
         </activity>
+        <activity
+            android:name=".GltestActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
+            android:screenOrientation="landscape">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="gltest" />
+        </activity>
     </application>
 
 </manifest>

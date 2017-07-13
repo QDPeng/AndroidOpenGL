@@ -4,6 +4,7 @@
 #include "app_engine.h"
 #include "SceneManager.h"
 #include "input_util.hpp"
+#include "welcome_scene.h"
 // max # of GL errors to print before giving up
 #define MAX_GL_ERRORS 200
 static AppEngine *_singleton = NULL;
@@ -153,9 +154,6 @@ void AppEngine::HandleCommand(int32_t cmd) {
     }
 }
 
-bool AppEngine::HandleInput(AInputEvent *event) {
-    return CookEvent(event, _cooked_event_callback);
-}
 
 static bool _cooked_event_callback(struct CookedEvent *event) {
     SceneManager *mgr = SceneManager::GetInstance();
@@ -193,6 +191,10 @@ static bool _cooked_event_callback(struct CookedEvent *event) {
     }
 
     return false;
+}
+
+bool AppEngine::HandleInput(AInputEvent *event) {
+    return CookEvent(event, _cooked_event_callback);
 }
 
 bool AppEngine::InitDisplay() {

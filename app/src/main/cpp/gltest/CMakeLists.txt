@@ -24,11 +24,16 @@ add_library(gltest SHARED
             vertexbuf.cpp
             ascii_to_geom.cpp
             shader.cpp
+            shape_render.cpp
+            text_render.cpp
+            ui_scene.cpp
+            anim.cpp
+            welcome_scene.cpp
             )
 
 target_include_directories(gltest PRIVATE
                            ${CMAKE_CURRENT_SOURCE_DIR}
-                           #${CMAKE_CURRENT_SOURCE_DIR}/data
+                           ${CMAKE_CURRENT_SOURCE_DIR}/data
                            ${ANDROID_NDK}/sources/android/native_app_glue)
 
 # add lib dependencies

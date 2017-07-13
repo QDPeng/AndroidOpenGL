@@ -25,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
                 //play endless tunnel game
                 startActivity(new Intent(this, NativeActivity.class));
                 break;
+            case R.id.gl_test:
+                //play endless tunnel game
+                startActivity(new Intent(this, GltestActivity.class));
+                break;
         }
     }
 }

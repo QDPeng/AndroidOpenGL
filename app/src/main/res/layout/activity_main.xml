@@ -16,5 +16,10 @@
         android:layout_height="wrap_content"
         android:onClick="onViewClick"
         android:text="native_game" />
-
+    <Button
+        android:id="@+id/gl_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onViewClick"
+        android:text="gl_test" />
 </LinearLayout>
