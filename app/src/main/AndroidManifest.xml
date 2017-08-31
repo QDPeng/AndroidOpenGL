@@ -33,6 +33,10 @@
                 android:name="android.app.lib_name"
                 android:value="gltest" />
         </activity>
+        <activity
+            android:name=".glsl.GLSLActivity"
+            android:label="@string/title_activity_glsl"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

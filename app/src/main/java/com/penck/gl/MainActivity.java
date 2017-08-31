@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.penck.gl.glsl.GLSLActivity;
 import com.penck.gl.view.CubeActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.gl_test:
                 //play endless tunnel game
                 startActivity(new Intent(this, GltestActivity.class));
+                break;
+            case R.id.glsl_tutorial:
+                startActivity(new Intent(this, GLSLActivity.class));
                 break;
         }
     }
