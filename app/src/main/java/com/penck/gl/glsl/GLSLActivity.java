@@ -1,6 +1,5 @@
 package com.penck.gl.glsl;
 
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,14 +16,11 @@ import android.view.View;
 
 import com.penck.gl.R;
 import com.penck.gl.glsl.readerer.BackgroundReader;
-
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
+import com.penck.gl.glsl.readerer.TextureRender;
 
 public class GLSLActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, GLSurfaceView.Renderer {
+        implements NavigationView.OnNavigationItemSelectedListener {
     private GLSLSurfaceView glSurfaceView;
-    private BackgroundReader backgroundReader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +28,8 @@ public class GLSLActivity extends AppCompatActivity
         setContentView(R.layout.activity_glsl);
         glSurfaceView = (GLSLSurfaceView) findViewById(R.id.gl_surfaceview);
         glSurfaceView.config();
-        glSurfaceView.setRenderer(this);
+//        glSurfaceView.setRenderer(new BackgroundReader(this));
+        glSurfaceView.setRenderer(new TextureRender(this));
         // Render the view only when there is a change in the drawing data
         glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -115,21 +112,5 @@ public class GLSLActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
-        GLES20.glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-        backgroundReader = new BackgroundReader(this);
-    }
 
-    @Override
-    public void onSurfaceChanged(GL10 gl10, int width, int height) {
-        GLES20.glViewport(0, 0, width, height);
-        // Clear screen to notify driver it should not load any pixels from previous frame.
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-    }
-
-    @Override
-    public void onDrawFrame(GL10 gl10) {
-        backgroundReader.draw();
-    }
 }

@@ -1,10 +1,9 @@
 package com.penck.gl.glsl.readerer;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
+import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
 
 import com.penck.gl.R;
@@ -14,11 +13,14 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
 /**
  * Created by peng on 2017/8/31.
  */
 
-public class BackgroundReader {
+public class BackgroundReader implements GLSurfaceView.Renderer{
     private static final int COORDS_PER_VERTEX = 3;
     private static final int TEXCOORDS_PER_VERTEX = 2;
     private static final int FLOAT_SIZE = 4;
@@ -31,7 +33,7 @@ public class BackgroundReader {
     private int mQuadPositionHandle;
     private int mQuadTexCoordHandle;
     private int mTextureId = -1;
-    // private int mTextureTarget = GLES11Ext.GL_TEXTURE_EXTERNAL_OES;
+   // private int mTextureTarget = GLES11Ext.GL_TEXTURE_EXTERNAL_OES;
     public static final float[] QUAD_COORDS = new float[]{
             -1.0f, -1.0f, 0.0f,
             -1.0f, +1.0f, 0.0f,
@@ -49,7 +51,6 @@ public class BackgroundReader {
 
     public BackgroundReader(Context context) {
         this.context = context;
-        create();
     }
 
     private void create() {
@@ -115,8 +116,6 @@ public class BackgroundReader {
         GLES20.glEnableVertexAttribArray(mQuadPositionHandle);
         GLES20.glEnableVertexAttribArray(mQuadTexCoordHandle);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
-//        GLES20.glEnable(GLES20.GL_TEXTURE_2D);
-//        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
 //        // Disable vertex arrays
         GLES20.glDisableVertexAttribArray(mQuadPositionHandle);
         GLES20.glDisableVertexAttribArray(mQuadTexCoordHandle);
@@ -129,6 +128,21 @@ public class BackgroundReader {
 
 
     }
+    @Override
+    public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
+        GLES20.glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+       create();
+    }
 
+    @Override
+    public void onSurfaceChanged(GL10 gl10, int width, int height) {
+        GLES20.glViewport(0, 0, width, height);
+        // Clear screen to notify driver it should not load any pixels from previous frame.
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+    }
 
+    @Override
+    public void onDrawFrame(GL10 gl10) {
+        draw();
+    }
 }
